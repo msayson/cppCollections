@@ -53,7 +53,14 @@ public:
       }
       return next->hasNode(val);
    }
-   // Print all values to standard output
+   // Returns value of head node
+   T first() {
+      if (node == nullptr) {
+         throw std::runtime_error("Head is empty, cannot return value");
+      }
+      return node->val;
+   }
+   // Prints all values to standard output
    void print() {
       if (node == nullptr) {
          printf("(empty)\n");
@@ -63,13 +70,6 @@ public:
          printf("%d->", node->val);
          next->print();
       }
-   }
-   // Return value of head node
-   T first() {
-      if (node == nullptr) {
-         throw std::runtime_error("Head is empty, cannot return value");
-      }
-      return node->val;
    }
    // Returns a linked list in the reverse order of the input
    // Effects: the input unique_ptr<LinkedList>* no longer points to a valid unique_ptr
