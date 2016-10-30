@@ -2,30 +2,32 @@
 #include <iostream>  //Use for printf
 #include <stdexcept> //Use for runtime_error
 
+template<class T>
 struct Node {
-   int val;
-   Node(int val_) : val(val_) {};
+   T val;
+   Node(T val_) : val(val_) {};
 };
 
+template<class T>
 class LinkedList {
 private:
-   std::unique_ptr<Node> node;
+   std::unique_ptr<Node<T>> node;
 public:
-   std::unique_ptr<LinkedList> next;
+   std::unique_ptr<LinkedList<T>> next;
    // Appends a node with this value to the end of the list
-   void addNode(int val) {
+   void addNode(T val) {
       if (node == nullptr) {
-         node = std::make_unique<Node>(val);
+         node = std::make_unique<Node<T>>(val);
          node->val = val;
       } else if (next == nullptr) {
-         next = std::make_unique<LinkedList>();
-         next->node = std::make_unique<Node>(val);
+         next = std::make_unique<LinkedList<T>>();
+         next->node = std::make_unique<Node<T>>(val);
       } else {
          next->addNode(val);
       }
    }
    // Removes the first instance of the given value
-   void removeNode(int val) {
+   void removeNode(T val) {
       if (node == nullptr) return;
       if (node->val == val) {
          if (next != nullptr) {
@@ -39,7 +41,7 @@ public:
       }
    }
    // Returns true iff list contains this value
-   bool hasNode(int val) {
+   bool hasNode(T val) {
       if (node == nullptr) {
          return false;
       }
@@ -63,7 +65,7 @@ public:
       }
    }
    // Return value of head node
-   int first() {
+   T first() {
       if (node == nullptr) {
          throw std::runtime_error("Head is empty, cannot return value");
       }
@@ -73,7 +75,7 @@ public:
    // Effects: the input unique_ptr<LinkedList>* no longer points to a valid unique_ptr
    // 
    // Example of use:
-   // std::unique_ptr<LinkedList> listPtr(new LinkedList);
+   // std::unique_ptr<LinkedList<int>> listPtr(new LinkedList<int>);
    // for (int i=0; i<5; i++) { listPtr->addNode(i); }
    // listPtr = LinkedList::reverseInPlace(&listPtr);
    static std::unique_ptr<LinkedList> reverseInPlace(std::unique_ptr<LinkedList>* headPtr) {
