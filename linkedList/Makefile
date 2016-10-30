@@ -2,14 +2,15 @@ RM=rm -f
 
 WARNING_FLAGS=-Wall -Wextra -Werror
 
-TEST=linkedListTest
-TEST_OBJ=$(TEST).o
+TEST_NAME=linkedListTest
+TEST_EXE=$(TEST_NAME).out
+TEST_OBJ=$(TEST_NAME).o
 
 all: test
 
 test: $(TEST_OBJ)
-	g++ $(WARNING_FLAGS) -o $(TEST) $(TEST_OBJ) -std=c++11
-	./$(TEST)
+	g++ $(WARNING_FLAGS) -o $(TEST_EXE) $(TEST_OBJ) -std=c++11
+	./$(TEST_EXE)
 
 clean:
-	$(RM) $(TEST) $(TEST_OBJ)
+	$(RM) $(TEST_EXE) $(TEST_OBJ)
