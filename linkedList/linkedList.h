@@ -77,7 +77,7 @@ public:
    // Example of use:
    // std::unique_ptr<LinkedList<int>> listPtr(new LinkedList<int>);
    // for (int i=0; i<5; i++) { listPtr->addNode(i); }
-   // listPtr = LinkedList::reverseInPlace(&listPtr);
+   // listPtr = LinkedList<int>::reverseInPlace(&listPtr);
    static std::unique_ptr<LinkedList> reverseInPlace(std::unique_ptr<LinkedList>* headPtr) {
       if (headPtr == nullptr || *headPtr == nullptr) return nullptr;
       if ((*headPtr)->next == nullptr) return std::move(*headPtr);
